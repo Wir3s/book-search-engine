@@ -33,14 +33,14 @@ const resolvers = {
       return { token, user };
     },
 
-    saveBook: async (parent, args) => {
-        const book = await Book.create(args);
-        return book;
-        },
+    saveBook: async (parent, { bookId }) => {
+      const book = await Book.create({ bookId });
+      return book;
+    },
     deleteBook: async (parent, args) => {
-        const book = await Book.findOneAndDelete(args);
-        return book;
-        }
+      const book = await Book.findOneAndDelete(args);
+      return book;
+    },
   },
 };
 
