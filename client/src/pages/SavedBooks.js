@@ -7,18 +7,25 @@ import {
   Col
 } from 'react-bootstrap';
 
-import { getMe, deleteBook } from '../utils/API';
+import { useQuery, useMutation } from '@apollo/client';
+import { GET_ME } from '../utils/queries';
+import { DELETE_BOOK } from '../utils/mutations';
+
+// import { getMe, deleteBook } from '../utils/API';
 import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
 
 const SavedBooks = () => {
   const [userData, setUserData] = useState({});
 
+  const [getMe, { error }] = useQuery(GET_ME);
+  const [deleteBook, {}] = useMutation(DELETE_BOOK);
+
   // use this to determine if `useEffect()` hook needs to run again
   const userDataLength = Object.keys(userData).length;
 
-  useEffect(() => {
-    const getUserData = async () => {
+  
+  const getUserData = async () => {
       try {
         const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -26,21 +33,18 @@ const SavedBooks = () => {
           return false;
         }
 
-        const response = await getMe(token);
+        const { data } = await getMe(token);
 
-        if (!response.ok) {
-          throw new Error('something went wrong!');
-        }
 
-        const user = await response.json();
-        setUserData(user);
+   
+        setUserData(data.user);
       } catch (err) {
         console.error(err);
       }
     };
 
     getUserData();
-  }, [userDataLength]);
+  
 
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteBook = async (bookId) => {
@@ -53,9 +57,6 @@ const SavedBooks = () => {
     try {
       const response = await deleteBook(bookId, token);
 
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
 
       const updatedUser = await response.json();
       setUserData(updatedUser);
@@ -97,6 +98,9 @@ const SavedBooks = () => {
                     <Button className='btn-block btn-danger' onClick={() => handleDeleteBook(book.bookId)}>
                       Delete this Book!
                     </Button>
+                    {error && (
+          <div className="my-3 p-3 bg-danger text-white">{error.message}</div>
+        )}
                   </Card.Body>
                 </Card>
               </Col>
