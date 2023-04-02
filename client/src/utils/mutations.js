@@ -39,7 +39,7 @@ export const SAVE_BOOK = gql`
 `;
 
 export const DELETE_BOOK = gql`
-  mutation DeleteBook($bookId: String!) {
+  mutation deleteBook($bookId: String!) {
     deleteBook(bookId: $bookId) {
       bookId
     }
