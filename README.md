@@ -16,7 +16,7 @@
   No installation is required.
 
 ## Usage
-  Simply visit [https://wir3s.github.io/react-portfolio/](https://apricot-cake-62747.herokuapp.com/) to view the app.
+  Simply visit [(https://apricot-cake-62747.herokuapp.com/)](https://apricot-cake-62747.herokuapp.com/) to view the app.
 
   
   [Screenshot](/books_sc.png)
