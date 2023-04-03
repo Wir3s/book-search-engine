@@ -38,11 +38,13 @@ const resolvers = {
 
     saveBook: async (parent, args, context) => {
       if (context.user) {
-        const book = await Book.create(args);
+        const book = await User.findOneAndUpdate(args);
 
         await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { myBooks: book.bookId } }
+          { $addToSet: { myBooks: book.bookId } },
+          { new: true,
+          }
         );
 
         return book;
