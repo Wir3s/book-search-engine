@@ -24,11 +24,11 @@ const SavedBooks = () => {
         return false;
       }
 
-      const { input } = await getMe({
+      const { user} = await getMe({
         token
       });
       
-      setUserData(input);
+      setUserData(user);
     } catch (err) {
       console.error(err);
     }
