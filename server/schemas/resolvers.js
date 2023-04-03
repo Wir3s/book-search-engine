@@ -42,7 +42,7 @@ const resolvers = {
 
         await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { myBooks: books.bookId } }
+          { $addToSet: { myBooks: book.bookId } }
         );
 
         return book;

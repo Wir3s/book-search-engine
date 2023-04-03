@@ -79,7 +79,7 @@ const SearchBooks = () => {
       const { data } = await saveBook({
         variables: {
           bookId,
-          user: Auth.data.token,
+          user: Auth.token,
         }
       });
 
