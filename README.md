@@ -19,7 +19,7 @@
   Simply visit https://wir3s.github.io/react-portfolio/ to view the app.
 
   
-  [Screenshot](/src/assets/images/books_sc.png)
+  [Screenshot](/books_sc.png)
 
 ## Contributing
   Any contribution suggestions are welcome.
